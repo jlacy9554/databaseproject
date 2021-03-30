@@ -3,16 +3,16 @@ include "mysqlClass.inc.php";
 
 function user_pass_check($username, $password)
 {
-	
+	global $db;
 	$query = "select * from account where username='$username'";
-	$result = mysql_query( $query );
+	$result = mysqli_query( $query );
 		
 	if (!$result)
 	{
 	   die ("user_pass_check() failed. Could not query the database: <br />". mysql_error());
 	}
 	else{
-		$row = mysql_fetch_row($result);
+		$row = mysqli_fetch_row($result);
 		if(strcmp($row[1],$password))
 			return 2; //wrong password
 		else 
@@ -26,7 +26,7 @@ function updateMediaTime($mediaid)
    						WHERE '$mediaid' = mediaid
 					";
 					 // Run the query created above on the database through the connection
-    $result = mysql_query( $query );
+    $result = mysqli_query( $query );
 	if (!$result)
 	{
 	   die ("updateMediaTime() failed. Could not query the database: <br />". mysql_error());
