@@ -1,7 +1,7 @@
 <?php
 
-$dbhost = "localhost";
-$dbuser = "root";
-$dbpass = "";
-$database = "metube";
+$dbhost = "mysql1.cs.clemson.edu";
+$dbuser = "MTbPrjct_tuzj";
+$dbpass = "metube123";
+$database = "MeTubeProject_zfvm";
 ?>

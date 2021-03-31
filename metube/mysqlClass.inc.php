@@ -11,9 +11,11 @@ class mysql_db {
 		$this->user = $dbuser;
 		$this->password = $dbpass;
 		$this->dbname = $database;
-		$this->db_connect_id = @mysqli_connect($this->server, $this->user, $this->password);
+		$this->db_connect_id = @mysqli_connect($this->server, $this->user, $this->password, $this->dbname);
 		if(mysqli_connect_errno()) {
-			printf("Connect failed: %s\n", mysqli_connect_error() );
+			printf("Connect failed: %s\n", mysqli_connect_error());
+
+			exit();
 		}
 	}
 	function sql_close() {
@@ -74,7 +76,7 @@ class mysql_db {
 	function sql_query($query = "") {
 		unset($this->query_result);
 		if($query != "") {
-			$this->query_result = @mysql_query($query, $this->db_connect_id);
+			$this->query_result = @mysqli_query($query, $this->db_connect_id);
 		}
 		if($this->query_result) {
 			unset($this->row[$this->query_result]);

@@ -41,17 +41,17 @@ function saveDownload(id)
 
 
 	$query = "SELECT * from media"; 
-	$result = mysql_query( $query );
+	$result = mysqli_query($db->db_connect_id, $query );
 	if (!$result)
 	{
-	   die ("Could not query the media table in the database: <br />". mysql_error());
+	   die ("Could not query the media table in the database: <br />". mysqli_error());
 	}
 ?>
     
     <div style="background:#339900;color:#FFFFFF; width:150px;">Uploaded Media</div>
 	<table width="50%" cellpadding="0" cellspacing="0">
 		<?php
-			while ($result_row = mysql_fetch_row($result))
+			while ($result_row = mysqli_fetch_row($result))
 			{ 
 		?>
         <tr valign="top">			

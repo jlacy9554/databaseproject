@@ -5,11 +5,11 @@ function user_pass_check($username, $password)
 {
 	global $db;
 	$query = "select * from account where username='$username'";
-	$result = mysqli_query( $query );
+	$result = mysqli_query($db->db_connect_id, $query );
 		
 	if (!$result)
 	{
-	   die ("user_pass_check() failed. Could not query the database: <br />". mysql_error());
+	   die ("user_pass_check() failed. Could not query the database: <br />". mysqli_error($db->db_connect_id));
 	}
 	else{
 		$row = mysqli_fetch_row($result);
@@ -26,10 +26,10 @@ function updateMediaTime($mediaid)
    						WHERE '$mediaid' = mediaid
 					";
 					 // Run the query created above on the database through the connection
-    $result = mysqli_query( $query );
+    $result = mysqli_query($db->db_connect_id, $query );
 	if (!$result)
 	{
-	   die ("updateMediaTime() failed. Could not query the database: <br />". mysql_error());
+	   die ("updateMediaTime() failed. Could not query the database: <br />". mysqli_error());
 	}
 }
 
