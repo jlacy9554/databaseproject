@@ -43,7 +43,12 @@ if(isset($_POST['submit'])) {
 		</tr>
 	</table>
 	</form>
-
+	<form action="logout.php">
+		<input type="submit" value="Logout">
+	</form>
+	<form action="register.php">
+		<input type="submit" value="Register">
+	</form>
 <?php
   if(isset($login_error))
    {  echo "<div id='passwd_result'>".$login_error."</div>";}
