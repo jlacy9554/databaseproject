@@ -58,5 +58,15 @@ function other()
 {
 	//You can write your own functions here.
 }
-	
+
+function newnamecheck($username){
+	global $db;
+	$query = "select * from account where username='$username'";
+	$result = mysqli_query($db->db_connect_id, $query );
+
+	if(mysqli_num_rows($result)>=1){
+		return 1;
+	}
+	return 0;
+}	
 ?>
