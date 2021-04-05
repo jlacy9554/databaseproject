@@ -44,7 +44,7 @@ function saveDownload(id)
 	$result = mysqli_query($db->db_connect_id, $query );
 	if (!$result)
 	{
-	   die ("Could not query the media table in the database: <br />". mysqli_error());
+	   die ("Could not query the media table in the database: <br />". mysqli_error($db->db_connect_id));
 	}
 ?>
     
