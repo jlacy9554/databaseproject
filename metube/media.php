@@ -44,7 +44,9 @@ if(isset($_GET['id'])) {
 
 </object>
 
-          
+<form action="browse.php">
+		<input type="submit" value="Back">
+</form>          
           
           
        
