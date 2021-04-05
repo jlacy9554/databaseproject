@@ -22,6 +22,8 @@ session_start();
  
                 
  </form>
-
+<form action="browse.php">
+		<input type="submit" value="Back">
+	</form>
 </body>
 </html>
