@@ -19,11 +19,29 @@ session_start();
   
 	<input value="Upload" name="submit" type="submit" />
   </p>
- 
-                
+  <table width="100%">
+		<tr>
+			<td  width="20%">Title:</td>
+			<td width="80%"><input class="text"  type="text" name="title" size="50"><br /></td>
+		</tr>
+		<tr>
+			<td  width="20%">Description:<br /></td>
+			<td width="80%"><textarea  id="desc" name="desc" rows="2" cols="50"></textarea><br /></td>
+		</tr>
+        <tr>
+			<td  width="20%">Keywords:<br /></td>
+			<td width="80%"><textarea  id="keywords" name="keywords" rows="2" cols="50">Separate the keywords by spaces</textarea><br /></td>
+		</tr>
+      
+			
+		</tr>
+	</table>
+      
  </form>
-<form action="browse.php">
+
+ <form action="browse.php">
 		<input type="submit" value="Back">
 	</form>
+
 </body>
 </html>
