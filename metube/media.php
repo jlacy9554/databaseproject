@@ -43,13 +43,7 @@ if(isset($_GET['id'])) {
 <embed type="application/x-mplayer2" src="<?php echo $result_row[2].$result_row[1];  ?>" name="MediaPlayer" width=320 height=240></embed>
 
 </object>
-
-<form action="browse.php">
-		<input type="submit" value="Back">
-</form>          
           
-          
-       
               
 <?php
 	}
@@ -59,6 +53,20 @@ else
 ?>
 <meta http-equiv="refresh" content="0;url=browse.php">
 <?php
+}
+?>
+	
+<?php 
+
+if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == 'true'){
+echo '<form action="browse.php">
+		<input type="submit" value="Back">
+</form>';
+}
+else{      
+echo '<form action="index.php">
+		<input type="submit" value="Back">
+</form>';
 }
 ?>
 </body>
