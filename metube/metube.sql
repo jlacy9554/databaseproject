@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `keywords` (
   `keyword` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `keyid` (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `keywords`
@@ -133,9 +133,9 @@ DROP TABLE IF EXISTS `mediainfo`;
 CREATE TABLE IF NOT EXISTS `mediainfo` (
   `mediainfoid` int NOT NULL,
   `title` varchar(50) NOT NULL,
-  `description` varchar(5000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `description` varchar(5000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`mediainfoid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `mediainfo`
