@@ -31,6 +31,9 @@ function saveDownload(id)
 <form action="profile.php">
 		<input type="submit" value="Profile">
 </form>
+<form action="channel.php">
+		<input type="submit" value="Channels">
+</form>
 <a href='media_upload.php'  style="color:#FF9900;">Upload File</a>
 <div id='upload_result'>
 <?php 
@@ -47,7 +50,7 @@ function saveDownload(id)
 
 
 	$query = "SELECT * from media"; 
-	$result = mysqli_query($db->db_connect_id, $query );
+	$result = mysqli_query($db->db_connect_id, $query);
 	if (!$result)
 	{
 	   die ("Could not query the media table in the database: <br />". mysqli_error($db->db_connect_id));
