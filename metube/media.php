@@ -12,10 +12,13 @@
 </head>
 
 <body>
+
+
+
 <?php
 if(isset($_GET['id'])) {
 	$query = "SELECT * FROM media WHERE mediaid='".$_GET['id']."'";
-	$result = mysqli_query($db->db_connect_id, $query );
+	$result = mysqli_query( $db->db_connect_id,$query );
 	$result_row = mysqli_fetch_row($result);
 	
 	updateMediaTime($_GET['id']);
@@ -23,29 +26,44 @@ if(isset($_GET['id'])) {
 	$filename=$result_row[1];
 	$filepath=$result_row[2];
 	$type=$result_row[3];
+
+	$query2 = "SELECT * FROM mediainfo WHERE mediainfoid='".$_GET['id']."'";
+	$nres = mysqli_query( $db->db_connect_id,$query2 );
+	$result_row2 = mysqli_fetch_row($nres);
+
+	$title =$result_row2[1];
+	$desc =$result_row2[2];
+
 	if(substr($type,0,5)=="image") //view image
 	{
-		echo "Viewing Picture:";
-		echo $result_row[2].$result_row[1];
-		echo "<img src='".$filepath.$filename."'/>";
+		echo "Viewing Picture:<br>";
+		echo $title;
+		echo "<br><img src='".$filepath.$filename."'/>";
+		echo "<br>",$desc;
 	}
 	else //view movie
 	{	
 ?>
-	<p>Viewing Video:<?php echo $result_row[2].$result_row[1];?></p>
+	<p>Viewing Video:<br><?php echo $title;?></p>
 	      
-    <object id="MediaPlayer" width=320 height=286 classid="CLSID:22D6f312-B0F6-11D0-94AB-0080C74C7E95" standby="Loading Windows Media Player components…" type="application/x-oleobject" codebase="http://activex.microsoft.com/activex/controls/mplayer/en/nsmp2inf.cab#Version=6,4,7,1112">
+<object id='MediaPlayer' width=320 height=286 
+	classid='CLSID:22D6f312-B0F6-11D0-94AB-0080C74C7E95' 
+	standby='Loading Windows Media Player components…' 
+	type='application/x-oleobject'
+	codebase='http://activex.microsoft.com/activex/controls/mplayer/en/nsmp2inf.cab#Version=6,4,7,1112'>
 
-<param name="filename" value="<?php echo $result_row[2].$result_row[1];  ?>">
-<param name="Showcontrols" value="True">
-<param name="autoStart" value="True">
-
-<embed type="application/x-mplayer2" src="<?php echo $result_row[2].$result_row[1];  ?>" name="MediaPlayer" width=320 height=240></embed>
+	<param name="filename" value="<?php echo $result_row[2].$result_row[1];  ?>">
+	<param name="Showcontrols" value="true">
+	<param name="autoStart" value="false">
+	<param name="ClickToPlay" value="true"> 
+	<embed type="application/x-mplayer2" pluginspage="http://www.microsoft.com/Windows/MediaPlayer/" src="<?php echo $result_row[2].$result_row[1];  ?>" name="MediaPlayer" width=320 height=240 autoStart="false"></embed>
 
 </object>
-          
+    
               
 <?php
+	echo "<h3>Description</h3>";
+	echo $desc,"<br><br>";
 	}
 }
 else
@@ -55,19 +73,71 @@ else
 <?php
 }
 ?>
-	
+
 <?php 
+
 
 if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == 'true'){
 echo '<form action="browse.php">
-		<input type="submit" value="Back">
-</form>';
-}
+		<input type="submit" value="Return to Browsing">
+</form>';?>
+
+
+
+<?php }
 else{      
 echo '<form action="index.php">
-		<input type="submit" value="Back">
+		<input type="submit" value="Return to Browsing">
 </form>';
+
 }
+
+if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == 'true'){
+echo "<form method='post'>
+<textarea  id='com' name='com' rows='2' cols='50'>Comment here</textarea><br>
+<input name='comm' type='submit' value='submit'>
+</form>";
+
+}
+
+if(isset($_POST['comm'])){
+	$comment= $_POST['com'];
+	$vid= $_GET['id'];
+
+	$sessinfo = $_SESSION['username'];
+	$queryi  = "SELECT id FROM account WHERE username = '$sessinfo'";
+    $resulti = mysqli_query($db->db_connect_id,$queryi);
+    $rowi = mysqli_fetch_array($resulti);
+    $id = $rowi['id'];
+
+ 
+	$queryc = "INSERT INTO comment (cid,vidid, userid, comments)VALUES (NULL, '$vid','$id','$comment' )";
+	mysqli_query($db->db_connect_id,$queryc);
+	
+}
+
+?>
+
+
+<h2>Comments:</h2>
+
+
+<?php
+	$vd =$_GET['id'];
+	$all = "SELECT * from comment WHERE vidid= $vd"; 
+	$rall = mysqli_query($db->db_connect_id, $all );
+	while($result_rall = mysqli_fetch_row($rall)){
+		$q2 = "SELECT username,id FROM account WHERE id = $result_rall[2]";
+		$q2r = mysqli_query($db->db_connect_id,$q2);
+		$r = mysqli_fetch_array($q2r);
+		$uname = $r[0];
+
+		echo '<h4>User: ',$uname,'</h4>'; 
+		echo $result_rall[3],'<br>';
+	}
+
+
+
 ?>
 </body>
 </html>
