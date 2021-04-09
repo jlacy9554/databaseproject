@@ -77,22 +77,21 @@ else
 <?php 
 
 
-if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == 'true'){
-echo '<form action="browse.php">
-		<input type="submit" value="Return to Browsing">
-</form>';?>
-
-
-
-<?php }
-else{      
+if(!isset($_SESSION['loggedin']) || empty($_SESSION['username'])){
 echo '<form action="index.php">
+		<input type="submit" value="Return to Browsing">
+</form>';
+}
+else{      
+echo '<form action="browse.php">
 		<input type="submit" value="Return to Browsing">
 </form>';
 
 }
 
-if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == 'true'){
+if(!isset($_SESSION['loggedin']) || empty($_SESSION['username'])){
+}
+else{
 echo "<form method='post'>
 <textarea  id='com' name='com' rows='2' cols='50'>Comment here</textarea><br>
 <input name='comm' type='submit' value='submit'>
