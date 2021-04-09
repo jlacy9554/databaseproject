@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 06, 2021 at 11:27 PM
+-- Generation Time: Apr 09, 2021 at 03:30 AM
 -- Server version: 8.0.21
 -- PHP Version: 7.3.21
 
@@ -49,6 +49,29 @@ INSERT INTO `account` (`username`, `password`, `email`, `id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `comment`
+--
+
+DROP TABLE IF EXISTS `comment`;
+CREATE TABLE IF NOT EXISTS `comment` (
+  `cid` int NOT NULL AUTO_INCREMENT,
+  `vidid` int NOT NULL,
+  `userid` int NOT NULL,
+  `comments` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  PRIMARY KEY (`cid`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `comment`
+--
+
+INSERT INTO `comment` (`cid`, `vidid`, `userid`, `comments`) VALUES
+(4, 3, 2, 'Comment here'),
+(5, 3, 2, 'Comment here');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `download`
 --
 
@@ -86,16 +109,14 @@ CREATE TABLE IF NOT EXISTS `keywords` (
   `keyword` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `keyid` (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `keywords`
 --
 
 INSERT INTO `keywords` (`id`, `videoid`, `keyword`) VALUES
-(3, 26, 'keywords'),
-(4, 26, 'by'),
-(5, 26, 'spaces');
+(6, 27, 'big');
 
 -- --------------------------------------------------------
 
@@ -111,17 +132,18 @@ CREATE TABLE IF NOT EXISTS `media` (
   `type` varchar(30) DEFAULT '0',
   `lastaccesstime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`mediaid`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `media`
 --
 
 INSERT INTO `media` (`mediaid`, `filename`, `filepath`, `type`, `lastaccesstime`) VALUES
-(3, 'sample2.wmv', 'uploads/metube/', 'video/x-ms-wmv', '2021-04-06 00:13:56'),
-(4, 'sample3.wmv', 'uploads/metube/', 'video/x-ms-wmv', '2010-01-28 15:58:58'),
-(5, 'sample1.wmv', 'uploads/metube/', 'video/x-ms-wmv', '2010-01-28 15:59:11'),
-(9, 'nintendogs_wallcoo.com_6.jpg', 'uploads/metube/', 'image/jpeg', '2021-04-06 00:14:19');
+(3, 'sample2.wmv', 'uploads/metube/', 'video/x-ms-wmv', '2021-04-09 03:29:22'),
+(4, 'sample3.wmv', 'uploads/metube/', 'video/x-ms-wmv', '2021-04-08 00:11:41'),
+(5, 'sample1.wmv', 'uploads/metube/', 'video/x-ms-wmv', '2021-04-08 01:30:46'),
+(9, 'nintendogs_wallcoo.com_6.jpg', 'uploads/metube/', 'image/jpeg', '2021-04-08 00:11:45'),
+(27, 'ezclap.png', 'uploads/test/', 'image/png', '2021-04-08 00:26:41');
 
 -- --------------------------------------------------------
 
@@ -133,16 +155,20 @@ DROP TABLE IF EXISTS `mediainfo`;
 CREATE TABLE IF NOT EXISTS `mediainfo` (
   `mediainfoid` int NOT NULL,
   `title` varchar(50) NOT NULL,
-  `description` varchar(5000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `description` varchar(5000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`mediainfoid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `mediainfo`
 --
 
 INSERT INTO `mediainfo` (`mediainfoid`, `title`, `description`) VALUES
-(26, 'test', 'test');
+(3, 'sample 2', 'this is sample 2'),
+(4, 'sample 3', 'sample 3 infp'),
+(5, 'sample 1', 'this is sample 1'),
+(9, 'nintendogs', 'this is nintendogs'),
+(27, 'testbig', 'big');
 
 -- --------------------------------------------------------
 
@@ -159,7 +185,7 @@ CREATE TABLE IF NOT EXISTS `upload` (
   PRIMARY KEY (`uploadid`),
   KEY `username` (`username`),
   KEY `mediaid` (`mediaid`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `upload`
@@ -169,7 +195,8 @@ INSERT INTO `upload` (`uploadid`, `username`, `mediaid`, `uploadtime`) VALUES
 (3, 'metube', 3, '2008-09-05 19:52:19'),
 (4, 'metube', 4, '2008-09-05 19:53:10'),
 (5, 'metube', 5, '2008-09-05 19:53:47'),
-(9, 'metube', 9, '2008-09-05 20:28:36');
+(9, 'metube', 9, '2008-09-05 20:28:36'),
+(27, 'test', 27, '2021-04-08 00:26:38');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
