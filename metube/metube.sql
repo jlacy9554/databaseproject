@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 09, 2021 at 03:30 AM
+-- Generation Time: Apr 13, 2021 at 11:03 PM
 -- Server version: 8.0.21
 -- PHP Version: 7.3.21
 
@@ -109,14 +109,7 @@ CREATE TABLE IF NOT EXISTS `keywords` (
   `keyword` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `keyid` (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `keywords`
---
-
-INSERT INTO `keywords` (`id`, `videoid`, `keyword`) VALUES
-(6, 27, 'big');
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -132,18 +125,17 @@ CREATE TABLE IF NOT EXISTS `media` (
   `type` varchar(30) DEFAULT '0',
   `lastaccesstime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`mediaid`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `media`
 --
 
 INSERT INTO `media` (`mediaid`, `filename`, `filepath`, `type`, `lastaccesstime`) VALUES
-(3, 'sample2.wmv', 'uploads/metube/', 'video/x-ms-wmv', '2021-04-09 03:29:22'),
-(4, 'sample3.wmv', 'uploads/metube/', 'video/x-ms-wmv', '2021-04-08 00:11:41'),
+(3, 'sample2.wmv', 'uploads/metube/', 'video/x-ms-wmv', '2021-04-09 03:52:31'),
+(4, 'sample3.wmv', 'uploads/metube/', 'video/x-ms-wmv', '2021-04-12 23:30:41'),
 (5, 'sample1.wmv', 'uploads/metube/', 'video/x-ms-wmv', '2021-04-08 01:30:46'),
-(9, 'nintendogs_wallcoo.com_6.jpg', 'uploads/metube/', 'image/jpeg', '2021-04-08 00:11:45'),
-(27, 'ezclap.png', 'uploads/test/', 'image/png', '2021-04-08 00:26:41');
+(9, 'nintendogs_wallcoo.com_6.jpg', 'uploads/metube/', 'image/jpeg', '2021-04-08 00:11:45');
 
 -- --------------------------------------------------------
 
@@ -167,8 +159,7 @@ INSERT INTO `mediainfo` (`mediainfoid`, `title`, `description`) VALUES
 (3, 'sample 2', 'this is sample 2'),
 (4, 'sample 3', 'sample 3 infp'),
 (5, 'sample 1', 'this is sample 1'),
-(9, 'nintendogs', 'this is nintendogs'),
-(27, 'testbig', 'big');
+(9, 'nintendogs', 'this is nintendogs');
 
 -- --------------------------------------------------------
 
@@ -185,7 +176,7 @@ CREATE TABLE IF NOT EXISTS `upload` (
   PRIMARY KEY (`uploadid`),
   KEY `username` (`username`),
   KEY `mediaid` (`mediaid`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `upload`
@@ -195,8 +186,7 @@ INSERT INTO `upload` (`uploadid`, `username`, `mediaid`, `uploadtime`) VALUES
 (3, 'metube', 3, '2008-09-05 19:52:19'),
 (4, 'metube', 4, '2008-09-05 19:53:10'),
 (5, 'metube', 5, '2008-09-05 19:53:47'),
-(9, 'metube', 9, '2008-09-05 20:28:36'),
-(27, 'test', 27, '2021-04-08 00:26:38');
+(9, 'metube', 9, '2008-09-05 20:28:36');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
