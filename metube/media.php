@@ -45,7 +45,7 @@ if(isset($_GET['id'])) {
 	{	
 ?>
 	<p>Viewing Video:<br><?php echo $title;?></p>
-	      
+	      <!--
 <object id='MediaPlayer' width=320 height=286 
 	classid='CLSID:22D6f312-B0F6-11D0-94AB-0080C74C7E95' 
 	standby='Loading Windows Media Player components…' 
@@ -59,12 +59,34 @@ if(isset($_GET['id'])) {
 	<embed type="application/x-mplayer2" pluginspage="http://www.microsoft.com/Windows/MediaPlayer/" src="<?php echo $result_row[2].$result_row[1];  ?>" name="MediaPlayer" width=320 height=240 autoStart="false"></embed>
 
 </object>
-    
-              
+-->
 <?php
+		if($result_row[3] == "video/mp4"){
+			echo '<video width="640" height="480" controls>
+					<source src="<?php echo $result_row[2].$result_row[1];?>" type="<?php echo $result_row[3];?>">
+			</video>';
+		}
+		else if($result_row[3] == "video/ogg"){
+			echo '<video width="640" height="480" controls>
+			<source src="<?php echo $result_row[2].$result_row[1];?>" type="<?php echo $result_row[3];?>">
+	</video>';
+		}
+
+		else if($result_row[3] == "video/webm"){
+			echo '<video width="640" height="480" controls>
+			<source src="<?php echo $result_row[2].$result_row[1];?>" type="<?php echo $result_row[3];?>">
+	</video>';
+		}
+
+		else{
+			echo "Media type unspported, please try downloading instead<br>";
+		}
+?>
+<?php
+	
+	}
 	echo "<h3>Description</h3>";
 	echo $desc,"<br><br>";
-	}
 }
 else
 {
@@ -140,3 +162,4 @@ if(isset($_POST['comm'])){
 ?>
 </body>
 </html>
+
