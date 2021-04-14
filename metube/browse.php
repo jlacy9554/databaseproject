@@ -34,6 +34,9 @@ function saveDownload(id)
 <form action="channel.php">
 		<input type="submit" value="Channels">
 </form>
+<form action="playlist.php">
+		<input type="submit" value="Playlists">
+</form>
 <a href='media_upload.php'  style="color:#FF9900;">Upload File</a>
 <div id='upload_result'>
 <?php 
