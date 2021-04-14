@@ -22,6 +22,7 @@ function user_pass_check($username, $password)
 
 function updateMediaTime($mediaid)
 {
+	global $db;
 	$query = "	update  media set lastaccesstime=NOW()
    						WHERE '$mediaid' = mediaid
 					";
