@@ -40,6 +40,9 @@ function saveDownload(id)
 <form action="favorites.php">
 		<input type="submit" value="Favorites">
 </form>
+<form action="dm.php">
+<input type="submit" value="DMs">
+</form>
 <a href='media_upload.php'  style="color:#FF9900;">Upload File</a>
 <div id='upload_result'>
 <?php 
