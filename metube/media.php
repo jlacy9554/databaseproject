@@ -62,20 +62,26 @@ if(isset($_GET['id'])) {
 -->
 <?php
 		if($result_row[3] == "video/mp4"){
-			echo '<video width="640" height="480" controls>
+			?>
+			<video width="640" height="480" controls preload="auto">
 					<source src="<?php echo $result_row[2].$result_row[1];?>" type="<?php echo $result_row[3];?>">
-			</video>';
+			</video>
+			<?php
 		}
 		else if($result_row[3] == "video/ogg"){
-			echo '<video width="640" height="480" controls>
-			<source src="<?php echo $result_row[2].$result_row[1];?>" type="<?php echo $result_row[3];?>">
-	</video>';
+			?>
+			<video width="640" height="480" controls preload="auto">
+					<source src="<?php echo $result_row[2].$result_row[1];?>" type="<?php echo $result_row[3];?>">
+			</video>
+			<?php
 		}
 
 		else if($result_row[3] == "video/webm"){
-			echo '<video width="640" height="480" controls>
-			<source src="<?php echo $result_row[2].$result_row[1];?>" type="<?php echo $result_row[3];?>">
-	</video>';
+			?>
+			<video width="640" height="480" controls preload="auto">
+					<source src="<?php echo $result_row[2].$result_row[1];?>" type="<?php echo $result_row[3];?>">
+			</video>
+			<?php
 		}
 
 		else{
@@ -115,14 +121,29 @@ if(!isset($_SESSION['loggedin']) || empty($_SESSION['username'])){
 }
 else{
 
-echo "<form method='post'>";
+	echo "<form method='post'>";
 	echo "<input type='submit' name='like' value='Like'>";
-echo "</form>";
+	echo "</form>";
+
 
 echo "<form method='post'>
 <textarea  id='com' name='com' rows='2' cols='50'>Comment here</textarea><br>
 <input name='comm' type='submit' value='submit'>
 </form>";
+
+}
+
+if(isset($_POST['like'])) {
+	$mediaid = $_GET['id'];
+	$username = $_SESSION['username'];
+
+	$allikedquery = "SELECT * FROM account_media WHERE accountid = (SELECT id FROM account WHERE username= \"".$username."\") AND mediaid = \"".$mediaid."\"";
+	$allikedresult = mysqli_query($db->db_connect_id, $allikedquery);
+
+	if ($allikedresult->num_rows == 0) {
+		$likequery = "INSERT INTO account_media(accountid, mediaid) VALUES ((SELECT id FROM account WHERE username=\"".$username."\"), \"".$mediaid."\")";
+		$likeresult = mysqli_query($db->db_connect_id, $likequery);
+	}
 
 }
 
@@ -139,20 +160,6 @@ if(isset($_POST['comm'])){
  
 	$queryc = "INSERT INTO comment (cid,vidid, userid, comments)VALUES (NULL, '$vid','$id','$comment' )";
 	mysqli_query($db->db_connect_id,$queryc);
-	
-}
-
-if(isset($_POST['like'])) {
-	$mediaid = $_GET['id'];
-	$username = $_SESSION['username'];
-
-	$allikedquery = "SELECT * FROM account_media WHERE accountid = (SELECT id FROM account WHERE username= \"".$username."\") AND mediaid = \"".$mediaid."\"";
-	$allikedresult = mysqli_query($db->db_connect_id, $allikedquery);
-
-	if ($allikedresult->num_rows == 0) {
-		$likequery = "INSERT INTO account_media(accountid, mediaid) VALUES ((SELECT id FROM account WHERE username=\"".$username."\"), \"".$mediaid."\")";
-		$likeresult = mysqli_query($db->db_connect_id, $likequery);
-	}
 	
 }
 
@@ -181,4 +188,3 @@ if(isset($_POST['like'])) {
 ?>
 </body>
 </html>
-
