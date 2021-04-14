@@ -114,6 +114,11 @@ echo '<form action="browse.php">
 if(!isset($_SESSION['loggedin']) || empty($_SESSION['username'])){
 }
 else{
+
+echo "<form method='post'>";
+	echo "<input type='submit' name='like' value='Like'>";
+echo "</form>";
+
 echo "<form method='post'>
 <textarea  id='com' name='com' rows='2' cols='50'>Comment here</textarea><br>
 <input name='comm' type='submit' value='submit'>
@@ -134,6 +139,20 @@ if(isset($_POST['comm'])){
  
 	$queryc = "INSERT INTO comment (cid,vidid, userid, comments)VALUES (NULL, '$vid','$id','$comment' )";
 	mysqli_query($db->db_connect_id,$queryc);
+	
+}
+
+if(isset($_POST['like'])) {
+	$mediaid = $_GET['id'];
+	$username = $_SESSION['username'];
+
+	$allikedquery = "SELECT * FROM account_media WHERE accountid = (SELECT id FROM account WHERE username= \"".$username."\") AND mediaid = \"".$mediaid."\"";
+	$allikedresult = mysqli_query($db->db_connect_id, $allikedquery);
+
+	if ($allikedresult->num_rows == 0) {
+		$likequery = "INSERT INTO account_media(accountid, mediaid) VALUES ((SELECT id FROM account WHERE username=\"".$username."\"), \"".$mediaid."\")";
+		$likeresult = mysqli_query($db->db_connect_id, $likequery);
+	}
 	
 }
 

@@ -37,6 +37,9 @@ function saveDownload(id)
 <form action="playlist.php">
 		<input type="submit" value="Playlists">
 </form>
+<form action="favorites.php">
+		<input type="submit" value="Favorites">
+</form>
 <a href='media_upload.php'  style="color:#FF9900;">Upload File</a>
 <div id='upload_result'>
 <?php 
