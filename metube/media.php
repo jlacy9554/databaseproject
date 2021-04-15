@@ -16,6 +16,11 @@
 
 
 <?php
+
+echo '<form action="browse.php">
+<input type="submit" value="Return to Browsing">
+</form>';
+
 if(isset($_GET['id'])) {
 	$query = "SELECT * FROM media WHERE mediaid='".$_GET['id']."'";
 	$result = mysqli_query( $db->db_connect_id,$query );
@@ -106,14 +111,35 @@ else
 
 
 if(!isset($_SESSION['loggedin']) || empty($_SESSION['username'])){
+
 echo '<form action="index.php">
 		<input type="submit" value="Return to Browsing">
 </form>';
+
 }
 else{      
-echo '<form action="browse.php">
-		<input type="submit" value="Return to Browsing">
-</form>';
+	if (isset($_GET['channel'])) {
+		$channel = $_GET['channel'];
+		echo "Uploaded by: " . $channel;
+		echo "<form method='post'>";
+			echo "<input type='submit' name='subscribe' value='Subscribe'>";
+		echo "</form>";
+			
+		echo "<br><br>";
+	}
+
+}
+
+if (isset($_POST['subscribe'])) {
+	$username = $_SESSION['username'];
+
+	$existsquery = "SELECT * FROM userrelations WHERE subscriberid= (SELECT id FROM account WHERE username=\"".$username."\") AND subscribedtoid= (SELECT id FROM account WHERE username=\"".$channel."\")";
+	$existsresult = mysqli_query($db->db_connect_id, $existsquery);
+
+	if ($existsresult->num_rows == 0){
+		$subscribequery = "INSERT INTO userrelations (subscriberid, subscribedtoid, relationship) VALUES ((SELECT id FROM account WHERE username=\"".$username."\"), (SELECT id FROM account WHERE username=\"".$channel."\"), 'subscribe')";
+		$insertsubscriber = mysqli_query($db->db_connect_id, $subscribequery);
+	}
 
 }
 

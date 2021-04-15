@@ -25,9 +25,6 @@ function saveDownload(id)
 
 <body>
 <p>Welcome <?php echo $_SESSION['username'];?></p>
-<form action="logout.php">
-		<input type="submit" value="Logout">
-</form>
 <form action="profile.php">
 		<input type="submit" value="Profile">
 </form>
@@ -42,6 +39,11 @@ function saveDownload(id)
 </form>
 <form action="dm.php">
 <input type="submit" value="DMs">
+<form action="relation.php">
+		<input type="submit" value="Contacts">
+</form>
+<form action="logout.php">
+		<input type="submit" value="Logout">
 </form>
 <a href='media_upload.php'  style="color:#FF9900;">Upload File</a>
 <div id='upload_result'>

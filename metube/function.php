@@ -13,10 +13,14 @@ function user_pass_check($username, $password)
 	}
 	else{
 		$row = mysqli_fetch_row($result);
-		if(strcmp($row[1],$password))
-			return 2; //wrong password
-		else 
-			return 0; //Checked.
+		if (!is_null($row)){
+			if(strcmp($row[1],$password))
+				return 2; //wrong password
+			else 
+				return 0; //Checked.
+		} else {
+			return 1;
+		}
 	}	
 }
 

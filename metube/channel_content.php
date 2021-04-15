@@ -8,6 +8,7 @@ global $db;
 
 if(isset($_GET['channel'])) {
     $currentchannel=$_GET['channel'];
+	$_SESSION['currentchannel']=$currentchannel;
 }
 
 echo $currentchannel;
@@ -31,7 +32,7 @@ if (!$result)
 					?>
 			</td>
             <td>
-            	<a href="media.php?id=<?php echo $result_row[0];?>" target="_blank"><?php echo $result_row[1];?></a> 
+			<a href="media.php?id=<?php echo $result_row[0];?>&channel=<?php echo $currentchannel;?>" target="_blank"><?php echo $result_row[1];?></a> 
             </td>
             <td>
             	<a href="<?php echo $result_row[2].$result_row[1];?>" target="_blank" onclick="javascript:saveDownload(<?php echo $result_row[0];?>);">Download</a>
