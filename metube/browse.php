@@ -59,7 +59,7 @@ function saveDownload(id)
 
 <!-- Search Area: relocate as needed -->
 
-<form action="search.php" method="POST">
+	<form action="search.php" method="POST">
 		<input type="text" name="search" placeholder="Search MeTube">
 		<button type="submit" name="submit_search">Search</button>
 	</form>
