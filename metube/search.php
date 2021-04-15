@@ -10,6 +10,10 @@
         $search = mysqli_real_escape_string($db->db_connect_id, $_POST['search']);
         $query = "SELECT * FROM mediainfo WHERE title LIKE '%$search%' OR description LIKE '%$search%' ";
         $result = mysqli_query($db->db_connect_id, $query);
+        if (!$result)
+	    {
+	        die ("Could not query the media table in the database: <br />". mysqli_error($db->db_connect_id));
+	    }
         $queryResult = mysqli_num_rows($result);
 
         if ($queryResult > 0) {
@@ -23,7 +27,7 @@
 
             /* Display results */
             while ($row = mysqli_fetch_assoc($result)) {
-                echo "<a href='media.php?mediaid=".$row['mediainfoid']."'><div class='search-box'>
+                echo "<a href='media.php?id=".$row['mediainfoid']."'><div class='search-box'>
                     <h3>".$row['title']."</h3>
                     <p>".$row['description']."</p>
                 </div></a>";
